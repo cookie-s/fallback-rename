@@ -1,0 +1,8 @@
+rule cc
+  command = gcc -fPIC -shared -o $out $in
+
+build all: phony librename.so
+
+build librename.so: cc rename.c
+
+default all
