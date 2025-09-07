@@ -1,5 +1,6 @@
 #define _GNU_SOURCE
 #define _FILE_OFFSET_BITS 64
+#include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
 
@@ -15,7 +16,14 @@ int rename(const char *oldpath, const char *newpath)
         return -1;
     }
 
-    int ret = copy_file_range(oldfd, NULL, newfd, NULL, 1000000, 0);
+    struct stat st;
+    if (fstat(oldfd, &st) == -1) {
+        return -1;
+    }
+
+    size_t sz = st.st_size;
+
+    int ret = copy_file_range(oldfd, NULL, newfd, NULL, sz, 0);
     if (ret == -1) {
         return -1;
     }
