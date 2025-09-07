@@ -4,6 +4,8 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+#include <stdio.h>
+
 int rename(const char *oldpath, const char *newpath)
 {
 
@@ -27,6 +29,8 @@ int rename(const char *oldpath, const char *newpath)
     if (ret == -1) {
         return -1;
     }
+
+    dprintf(2, "rename: copied %s -> %s (%d bytes)\n", oldpath, newpath, ret);
 
     unlink(oldpath);
 
