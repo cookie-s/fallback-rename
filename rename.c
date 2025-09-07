@@ -13,7 +13,7 @@ int rename(const char *oldpath, const char *newpath)
     if (oldfd == -1) {
         return -1;
     }
-    int newfd = open(newpath, O_WRONLY | O_CREAT);
+    int newfd = open(newpath, O_WRONLY | O_CREAT | O_TRUNC);
     if (newfd == -1) {
         return -1;
     }
