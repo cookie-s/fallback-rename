@@ -1,0 +1,8 @@
+
+```
+ninja
+```
+
+```
+ninja -t clean
+```
